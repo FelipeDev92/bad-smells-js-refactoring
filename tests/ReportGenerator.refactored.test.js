@@ -1,4 +1,4 @@
-import { ReportGenerator } from '../src/ReportGenerator.js';
+import { ReportGenerator } from '../src/ReportGenerator.refactored.js';
 
 const adminUser = { name: 'Admin', role: 'ADMIN' };
 const standardUser = { name: 'User', role: 'USER' };

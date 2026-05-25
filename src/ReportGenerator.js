@@ -30,14 +30,18 @@ export class ReportGenerator {
         if (item.value > 1000) {
           // Lógica bônus para admins
           item.priority = true;
+        } else {
+          // Garante que itens menores não herdem a propriedade de iterações passadas
+          item.priority = false;
         }
 
         if (reportType === 'CSV') {
           report += `${item.id},${item.name},${item.value},${user.name}\n`;
           total += item.value;
         } else if (reportType === 'HTML') {
-          const style = item.priority ? 'style="font-weight:bold;"' : '';
-          report += `<tr ${style}><td>${item.id}</td><td>${item.name}</td><td>${item.value}</td></tr>\n`;
+          // CONSERTADO: Remove o espaço fixo "<tr " eliminando o erro de string do teste
+          const trTag = item.priority ? '<tr style="font-weight:bold;">' : '<tr>';
+          report += `${trTag}<td>${item.id}</td><td>${item.name}</td><td>${item.value}</td></tr>\n`;
           total += item.value;
         }
       } else if (user.role === 'USER') {
